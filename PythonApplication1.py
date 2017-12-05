@@ -15,9 +15,9 @@ def mkbat():
 					   if child.attrib['property']=='attributes':
 						   node_cmd =child[4][1].text
 						   node_name = z[2][0].text
-						 #  fp= open('%s.bat'%(node_name),"w")
-						 #  fp.write(node_cmd)
-						#   fp.close()
+						   fp= open('%s.bat'%(node_name),"w")
+						   fp.write(node_cmd)
+						   fp.close()
 						   print(node_name,node_cmd)
 if __name__=='__main__':
     mkbat()
