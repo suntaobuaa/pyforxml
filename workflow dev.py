@@ -1,5 +1,6 @@
 #coding=utf-8
 import xml.etree.ElementTree as ET
+import os
 input_file = []
 output_file= []
 arguments = []
@@ -12,7 +13,9 @@ universe = []
 when_to_transfer_output = []
 a = []
 id = []
-tree = ET.parse('C:/Users/sunta/Desktop/ZZXNOVA2.0/fofofo.xml')
+pwd = os.getcwd()
+pwdxml = pwd + '/workflow.xml'
+tree = ET.parse(pwdxml)
 work=tree.getroot()
 first = work.findall('phase/node')
 pre = []
@@ -53,15 +56,15 @@ for t in two:
 			
 
 
-s = 'C:/Users/sunta/Desktop/ZZXNOVA2.0'
-l = [executable,universe,a]
-ss = ['executable = ','universe = ','']
+s = pwd
+l = [executable,universe,log,error,output,a]
+ss = ['executable = ','universe = ','log = ','error = ','output = ','']
 
 #generate sub file
 for i in range(len(id)):
     f = open(s+'/node_'+id[i]+'.sub',"w")
     f.write('requirements=(Target.OpSys == "WINDOWS")&&(Target.name == "slot1@SHAOHAN-PC")\n')
-    for j in range(3):
+    for j in range(6):
         f.write(ss[j])
         f.write(l[j][i])
         f.write('\n')
@@ -70,7 +73,8 @@ for i in range(len(id)):
 #print(id)
 #generate dag file
 three = work.findall('phase/parent')
-ff = open('C:/Users/sunta/Desktop/ZZXNOVA2.0/workflow.dag',"w")
+pwddag = pwd + '/workflow.dag'
+ff = open(pwddag,"w")
 s = 'job'
 s0 = 'parent'
 s1 = 'child'
